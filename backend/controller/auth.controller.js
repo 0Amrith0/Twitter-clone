@@ -19,7 +19,7 @@ export const signup = async(req, res) => {
         const existingEmail = await User.findOne({ email });
         if (existingEmail){
             return res.status(400).json({ error : "Email is already is use"})
-        }
+        } 
 
         if(password.length < 6){
             return res.status(400).json({ error : "Password must be at least 6 characters long"})

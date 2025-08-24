@@ -16,7 +16,8 @@ const Sidebar = ({ authUser }) => {
 
 			try {
 				const res = await fetch("/api/auth/logout", {
-					method: "POST"
+					method: "POST",
+  					credentials: "include"
 				})
 				const data = await res.json();
 				
