@@ -2,7 +2,7 @@ import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import {v2 as cloudinary} from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
@@ -13,17 +13,16 @@ import notificationRoutes from "./routes/notification.route.js";
 dotenv.config();
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
-
-app.use(express.json({limit: "5mb"}));
+app.use(express.json({ limit: "5mb" }));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,14 +32,19 @@ app.use("/api/posts", postRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname, "/frontend/dist")));
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "frontend", "dist");
+  app.use(express.static(frontendPath));
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "/frontend/dist/index.html"));
-    });
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(frontendPath, "index.html"));
+  });
 }
 
+console.log("All env vars:");
+for (const [key, value] of Object.entries(process.env)) {
+  console.log(`${key} = ${value}`);
+}
 
 app.listen(PORT, (req, res) => {
     console.log(`Server started on PORT: ${PORT}`)
