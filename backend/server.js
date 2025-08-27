@@ -41,8 +41,8 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
-await connectDB();
 
 app.listen(PORT, (req, res) => {
     console.log(`Server started on PORT: ${PORT}`)
+    connectDB();
 })
