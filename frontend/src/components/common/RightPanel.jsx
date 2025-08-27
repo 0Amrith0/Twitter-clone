@@ -6,7 +6,7 @@ import useFollow from "../../hooks/useFollow";
 import RightPanelSkeleton from "../skeletons/RightPanelSkeleton";
 import LoadingSpinner from "./LoadingSpinner";
 
-const RightPanel = () => {
+const RightPanel = () => { 
 	const {data: suggestedUsers, isLoading} = useQuery({
 		queryKey: ["suggestedUsers"],
 		queryFn: async() => {

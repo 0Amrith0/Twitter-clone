@@ -99,7 +99,7 @@ export const updateUser = async(req, res) => {
     const userId = req.user._id
 
     try {
-        let user = await findById(userId);
+        let user = await User.findById(userId);
         if(!user) return res.status(404).json({ error: "User not found" });
 
         if((!newPassword && currentPassword) || (newPassword && !currentPassword)){
