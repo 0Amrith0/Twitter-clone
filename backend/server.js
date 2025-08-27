@@ -19,7 +19,7 @@ cloudinary.config({
 });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 const __dirname = path.resolve();
 
 app.use(express.json({ limit: "5mb" }));
@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "production") {
   const frontendPath = path.join(__dirname, "frontend", "dist");
   app.use(express.static(frontendPath));
 
-  app.get("*", (req, res) => {
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.resolve(frontendPath, "index.html"));
   });
 }
