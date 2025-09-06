@@ -73,7 +73,7 @@ const Sidebar = ({ authUser }) => {
 				{authUser && (
 					<Link
 						to={`/profile/${authUser.username}`}
-						className='mt-auto mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full'
+						className='mt-auto mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-stone-400 py-2 px-4 rounded-full'
 					>
 						<div className='avatar hidden md:inline-flex'>
 							<div className='w-8 rounded-full'>
